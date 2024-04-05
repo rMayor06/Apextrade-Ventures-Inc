@@ -12,7 +12,7 @@ export default async function Home() {
           className="stroke-cyan-500 mx-auto mt-7"
         />
         <h1 className="text-3xl font-bold whitespace-nowrap dark:text-black text-center">
-          APEXTRADE VENTURES INC.
+          APEXTRADE VENTURES INCORPORATION
         </h1>
       </div>
     </>
