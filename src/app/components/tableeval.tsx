@@ -3,27 +3,17 @@ import TableEvalInfo from "./tableevalinfo";
 
 const RatingTable = ({
   rating,
+  setRate,
+  rate,
   handleCompute,
-  color,
   currentDate,
   evalemp,
   setPurpose,
   purpose,
   setComment,
   comment,
-  setRating1,
-  setRating2,
-  setRating3,
-  setRating4,
-  setRating5,
-  setRating6,
-  setRating7,
-  setRating8,
-  setRating9,
-  setRating10,
-  setRating11,
-  setRating12,
   total1ok,
+  setTotal1ok,
   total2ok,
   total3ok,
   total4ok,
@@ -36,18 +26,8 @@ const RatingTable = ({
   total11ok,
   total12ok,
   oatotal,
-  rating1,
-  rating2,
-  rating3,
-  rating4,
-  rating5,
-  rating6,
-  rating7,
-  rating8,
-  rating9,
-  rating10,
-  rating11,
-  rating12,
+  isChecked,
+  setIsChecked,
 }) => {
   const td = "border border-gray-900 px-4 py-2 text-left mb-4 text-xl";
 
@@ -60,12 +40,12 @@ const RatingTable = ({
           </td>
         </tr>
         <tr>
-          <td colspan="2" className={`${td} font-bold w-[40%]`}>
+          <td colspan="2" className={`${td} font-bold w-[10%]`}>
             Ratee Name
           </td>
-          <td className={`${td} font-bold`}>Employee No.</td>
-          <td className={`${td} font-bold`}>Position and Department</td>
-          <td className={`${td} font-bold`}>Date Hired</td>
+          <td className={`${td} font-bold w-[15%]`}>Employee No.</td>
+          <td className={`${td} font-bold w-[55%]`}>Position and Department</td>
+          <td className={`${td} font-bold w-[20%]`}>Date Hired</td>
         </tr>
         <tr>
           <td colspan="2" className={`${td}`}>
@@ -100,7 +80,7 @@ const RatingTable = ({
               value={purpose}
               onChange={(e) => setPurpose(e.target.value)}
             >
-              <option>ANNUAL PERFOMANCE REVIEW</option>
+              <option>ANNUAL PERFORMANCE REVIEW</option>
               <option>PROMOTION/UPGRADE</option>
               <option>REGULARIZATION</option>
               <option>TRANSFER</option>
@@ -126,7 +106,7 @@ const RatingTable = ({
             FACTORS
           </td>
           <td className={`${td} font-bold text-center`}>RATINGS</td>
-          <td className={`${td} font-bold text-center`}>MULTIPLIER</td>
+          <td className={`${td} font-bold text-center`}>COMMENTS</td>
           <td className={`${td} font-bold text-center`}>PERFORMANCE RATINGS</td>
         </tr>
         <tr>
@@ -140,9 +120,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating1}
+              value={rate.one}
               onChange={(e) => {
-                setRating1(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  one: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -153,13 +136,26 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>1.50</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              value={rate.comment1}
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment1: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total1ok}
-              onChange={(e) => setRating1(e.target.value)}
+              onChange={(e) => setRate.one(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -169,9 +165,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating2}
+              value={rate.two}
               onChange={(e) => {
-                setRating2(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  two: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -182,13 +181,26 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>1.50</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              value={rate.comment2}
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment2: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total2ok}
-              onChange={(e) => setRating1(e.target.value)}
+              onChange={(e) => setRate.two(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -203,9 +215,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating3}
+              value={rate.three}
               onChange={(e) => {
-                setRating3(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  three: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -214,13 +229,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>1.50</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment3: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total3ok}
-              onChange={(e) => setRating3(e.target.value)}
+              onChange={(e) => setRate.three(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -230,9 +257,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating4}
+              value={rate.four}
               onChange={(e) => {
-                setRating4(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  four: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -241,13 +271,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.50</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment4: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total4ok}
-              onChange={(e) => setRating4(e.target.value)}
+              onChange={(e) => setRate.four(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -262,9 +304,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating5}
+              value={rate.five}
               onChange={(e) => {
-                setRating5(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  five: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -273,13 +318,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>1.00</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment5: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total5ok}
-              onChange={(e) => setRating5(e.target.value)}
+              onChange={(e) => setRate.five(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -289,9 +346,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating6}
+              value={rate.six}
               onChange={(e) => {
-                setRating6(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  six: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -300,13 +360,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.50</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment6: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total6ok}
-              onChange={(e) => setRating6(e.target.value)}
+              onChange={(e) => setRate.six(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -316,9 +388,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating7}
+              value={rate.seven}
               onChange={(e) => {
-                setRating7(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  seven: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -327,13 +402,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.50</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment7: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total7ok}
-              onChange={(e) => setRating7(e.target.value)}
+              onChange={(e) => setRate.seven(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -348,9 +435,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating8}
+              value={rate.eight}
               onChange={(e) => {
-                setRating8(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  eight: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -359,13 +449,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.70</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment8: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total8ok}
-              onChange={(e) => setRating8(e.target.value)}
+              onChange={(e) => setRate.eight(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -375,9 +477,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating9}
+              value={rate.nine}
               onChange={(e) => {
-                setRating9(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  nine: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -386,13 +491,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.70</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment9: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total9ok}
-              onChange={(e) => setRating9(e.target.value)}
+              onChange={(e) => setRate.nine(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -402,9 +519,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating10}
+              value={rate.ten}
               onChange={(e) => {
-                setRating10(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  ten: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -413,13 +533,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.45</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment10: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total10ok}
-              onChange={(e) => setRating10(e.target.value)}
+              onChange={(e) => setRate.ten(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -429,9 +561,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating11}
+              value={rate.eleven}
               onChange={(e) => {
-                setRating11(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  eleven: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -440,14 +575,26 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.70</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment11: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total11ok}
               onChange={(e) => {
-                setRating11(e.target.value);
+                setRate.eleven(e.target.value);
                 handleCompute();
               }}
             ></input>
@@ -459,9 +606,12 @@ const RatingTable = ({
           </td>
           <td className={`${td} font-bold text-center`}>
             <select
-              value={rating12}
+              value={rate.twelve}
               onChange={(e) => {
-                setRating12(e.target.value);
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  twelve: e.target.value,
+                }));
                 handleCompute();
               }}
             >
@@ -470,13 +620,25 @@ const RatingTable = ({
               ))}
             </select>
           </td>
-          <td className={`${td} font-bold text-center`}>0.45</td>
+          <td className={`${td} text-center`}>
+            <input
+              className="w-full text-center italic"
+              type="text"
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  comment12: e.target.value,
+                }));
+              }}
+              required
+            />
+          </td>
           <td className={`${td} font-bold text-center`}>
             <input
               className="w-20 text-center"
               type="text"
               value={total12ok}
-              onChange={(e) => setRating12(e.target.value)}
+              onChange={(e) => setRate.twelve(e.target.value)}
             ></input>
           </td>
         </tr>
@@ -498,61 +660,96 @@ const RatingTable = ({
           </td>
         </tr>
         <tr>
-          <td colspan="2" className={`${td}`}></td>
-          <td colspan="2" className={`${td} bg-${color.five}-500`}>
-            <h1 className="text-left align-center">
-              <input type="checkbox" value="" /> 5 - Exceptional Performance
-            </h1>
+          <td colspan="2" className={`${td} text-right`}>
+            <input
+              type="checkbox"
+              className="form-checkbox h-5 w-5 text-right"
+              checked={isChecked.five}
+              onChange={() => setIsChecked.five(!isChecked.five)}
+              disabled={true}
+            />
           </td>
-          <td className={`${td} text-center bg-${color.five}-500`}>95-100</td>
+          <td colspan="2" className={`${td} align-top`}>
+            <h1 className="text-left align-top">5 - Exceptional Performance</h1>
+          </td>
+          <td className={`${td} text-center`}>95-100</td>
         </tr>
         <tr>
-          <td colspan="2" className={`${td}`}></td>
-          <td colspan="2" className={`${td} bg-${color.four}-500`}>
-            <h1 className="text-left">
-              <input type="checkbox"></input> 4 - Above Standard Performance
-            </h1>
+          <td colspan="2" className={`${td} text-right`}>
+            <input
+              type="checkbox"
+              className="h-5 w-5"
+              checked={isChecked.four}
+              onChange={() => setIsChecked.four(!isChecked.four)}
+              disabled={true}
+            />
           </td>
-          <td className={`${td} text-center bg-${color.four}-500`}>85-94</td>
+          <td colspan="2" className={`${td}`}>
+            <h1 className="text-left">4 - Above Standard Performance</h1>
+          </td>
+          <td className={`${td} text-center`}>85-94</td>
         </tr>
         <tr>
-          <td colspan="2" className={`${td}`}></td>
-          <td colspan="2" className={`${td} bg-${color.three}-500`}>
-            <h1 className="text-left">
-              <input type="checkbox"></input> 3 - Standard Performance
-            </h1>
+          <td colspan="2" className={`${td} text-right`}>
+            <input
+              type="checkbox"
+              className="h-5 w-5"
+              checked={isChecked.three}
+              onChange={() => setIsChecked.three(!isChecked.three)}
+              disabled={true}
+            />
           </td>
-          <td className={`${td} text-center bg-${color.three}-500`}>75-84</td>
+          <td colspan="2" className={`${td}`}>
+            <h1 className="text-left">3 - Standard Performance</h1>
+          </td>
+          <td className={`${td} text-center`}>75-84</td>
         </tr>
         <tr>
-          <td colspan="2" className={`${td}`}></td>
-          <td colspan="2" className={`${td} bg-${color.two}-500`}>
-            <h1 className="text-left">
-              <input type="checkbox"></input> 2 - Below Standard Performance
-            </h1>
+          <td colspan="2" className={`${td} text-right`}>
+            <input
+              type="checkbox"
+              className="h-5 w-5"
+              checked={isChecked.two}
+              onChange={() => setIsChecked.two(!isChecked.two)}
+              disabled={true}
+            />
           </td>
-          <td className={`${td} text-center bg-${color.two}-500`}>65-74 </td>
+          <td colspan="2" className={`${td}`}>
+            <h1 className="text-left">2 - Below Standard Performance</h1>
+          </td>
+          <td className={`${td} text-center`}>65-74 </td>
         </tr>
         <tr>
-          <td colspan="2" className={`${td}`}></td>
-          <td colspan="2" className={`${td} bg-${color.one}-500`}>
-            <h1 className="text-left">
-              <input type="checkbox"></input> 1 - Unacceptable performance
-            </h1>
+          <td colspan="2" className={`${td} text-right`}>
+            <input
+              type="checkbox"
+              className="h-5 w-5"
+              checked={isChecked.one}
+              onChange={() => setIsChecked.one(!isChecked.one)}
+              disabled={true}
+            />
           </td>
-          <td className={`${td} text-center bg-${color.one}-500`}>below 65</td>
+          <td colspan="2" className={`${td}`}>
+            <h1 className="text-left">1 - Unacceptable performance</h1>
+          </td>
+          <td className={`${td} text-center`}>below 65</td>
         </tr>
         <tr>
           <td colspan="5" className={`${td} font-bold text-center bg-gray-200`}>
-            COMMENTS
+            OVER-ALL COMMENT
           </td>
         </tr>
         <tr className="border-r border-l border-gray-900">
           <td className={`${td}`} colspan="5">
             <textarea
               className="w-full h-12 text-center font-normal italic"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
+              value={rate.commentall}
+              onChange={(e) => {
+                setRate((prevRate) => ({
+                  ...prevRate,
+                  commentall: e.target.value,
+                }));
+              }}
             ></textarea>
           </td>
         </tr>

@@ -77,10 +77,50 @@ const Evaluatedlist = ({ params }) => {
   const comments2 =
     "px-4 py-2 border border-slate-700 text-2xl text-center italic";
 
+  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [isChecked3, setIsChecked3] = useState(false);
+  const [isChecked4, setIsChecked4] = useState(false);
+  const [isChecked5, setIsChecked5] = useState(false);
+
+  useEffect(() => {
+    if (evalemp.totalscore >= 95) {
+      setIsChecked2(false);
+      setIsChecked(false);
+      setIsChecked3(false);
+      setIsChecked4(false);
+      setIsChecked5(true);
+    } else if (evalemp.totalscore >= 85) {
+      setIsChecked2(false);
+      setIsChecked(false);
+      setIsChecked3(false);
+      setIsChecked4(true);
+      setIsChecked5(false);
+    } else if (evalemp.totalscore >= 75) {
+      setIsChecked2(false);
+      setIsChecked(false);
+      setIsChecked3(true);
+      setIsChecked4(false);
+      setIsChecked5(false);
+    } else if (evalemp.totalscore >= 65) {
+      setIsChecked2(true);
+      setIsChecked(false);
+      setIsChecked3(false);
+      setIsChecked4(false);
+      setIsChecked5(false);
+    } else {
+      setIsChecked(true);
+      setIsChecked2(false);
+      setIsChecked3(false);
+      setIsChecked4(false);
+      setIsChecked5(false);
+    }
+  }, [evalemp.totalscore]);
+
   return (
     <div className="text-center mx-auto">
       <button className="btn btn-block" onClick={createPDF} type="button">
-        Download and Save
+        DOWNLOAD
       </button>
       <div id="pdf">
         <h1 className="font-bold text-2xl mt-8">
@@ -107,12 +147,14 @@ const Evaluatedlist = ({ params }) => {
               </td>
             </tr>
             <tr>
-              <td colspan="2" className={`${td} font-bold w-[40%]`}>
+              <td colspan="2" className={`${td} font-bold w-[10%]`}>
                 Ratee Name
               </td>
-              <td className={`${td} font-bold`}>Employee No.</td>
-              <td className={`${td} font-bold`}>Position and Department</td>
-              <td className={`${td} font-bold`}>Date Hired</td>
+              <td className={`${td} font-bold w-[15%]`}>Employee No.</td>
+              <td className={`${td} font-bold w-[55%]`}>
+                Position and Department
+              </td>
+              <td className={`${td} font-bold w-[20%]`}>Date Hired</td>
             </tr>
             <tr>
               <td colspan="2" className={`${td}`}>
@@ -183,7 +225,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.attendance}
               </td>
-              <td className={`${td} font-bold text-center`}>1.50</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment1}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tattendance}
               </td>
@@ -195,7 +237,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.workefficiency}
               </td>
-              <td className={`${td} font-bold text-center`}>1.50</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment2}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tworkefficiency}
               </td>
@@ -212,7 +254,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.behavior}
               </td>
-              <td className={`${td} font-bold text-center`}>1.50</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment3}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tbehavior}
               </td>
@@ -224,7 +266,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.relatedduties}
               </td>
-              <td className={`${td} font-bold text-center`}>0.50</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment4}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.trelatedduties}
               </td>
@@ -241,7 +283,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.technical}
               </td>
-              <td className={`${td} font-bold text-center`}>1.00</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment5}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.ttechnical}
               </td>
@@ -253,7 +295,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.communication}
               </td>
-              <td className={`${td} font-bold text-center`}>0.50</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment6}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tcommunication}
               </td>
@@ -265,7 +307,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.resourceutilization}
               </td>
-              <td className={`${td} font-bold text-center`}>0.50</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment7}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tresourceutilization}
               </td>
@@ -282,7 +324,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.initiative}
               </td>
-              <td className={`${td} font-bold text-center`}>0.70</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment8}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tinitiative}
               </td>
@@ -294,7 +336,7 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.integrity}
               </td>
-              <td className={`${td} font-bold text-center`}>0.70</td>
+              <td className={`${td} italic text-center`}>{evalemp.comment9}</td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tintegrity}
               </td>
@@ -306,7 +348,9 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.safety}
               </td>
-              <td className={`${td} font-bold text-center`}>0.45</td>
+              <td className={`${td} italic text-center`}>
+                {evalemp.comment10}
+              </td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tsafety}
               </td>
@@ -318,7 +362,9 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.dependability}
               </td>
-              <td className={`${td} font-bold text-center`}>0.70</td>
+              <td className={`${td} italic text-center`}>
+                {evalemp.comment11}
+              </td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tdependability}
               </td>
@@ -330,7 +376,9 @@ const Evaluatedlist = ({ params }) => {
               <td className={`${td} font-bold text-center`}>
                 {evalemp.loyalty}
               </td>
-              <td className={`${td} font-bold text-center`}>0.45</td>
+              <td className={`${td} italic text-center`}>
+                {evalemp.comment12}
+              </td>
               <td className={`${td} font-bold text-center`}>
                 {evalemp.tloyalty}
               </td>
@@ -353,13 +401,22 @@ const Evaluatedlist = ({ params }) => {
             </tr>
             <tr className={`${td}`}>
               <td className={`${td}`} colspan="4"></td>
-              <td className={`${td} text-center mb-2 mt-4`}>Point Rating</td>
+              <td className={`${td} text-center mb-2 mt-4`}>
+                <button>Point Rating</button>
+              </td>
             </tr>
             <tr>
               <td colspan="2" className={`${td}`}></td>
               <td colspan="2" className={`${td}`}>
                 <h1 className="text-left align-center">
-                  <input type="checkbox" value="" /> 5 - Exceptional Performance
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5"
+                    checked={isChecked5}
+                    onChange={() => setIsChecked5(!isChecked5)}
+                    disabled={true}
+                  />
+                  5 - Exceptional Performance
                 </h1>
               </td>
               <td className={`${td} text-center`}>95-100</td>
@@ -368,7 +425,14 @@ const Evaluatedlist = ({ params }) => {
               <td colspan="2" className={`${td}`}></td>
               <td colspan="2" className={`${td}`}>
                 <h1 className="text-left">
-                  <input type="checkbox"></input> 4 - Above Standard Performance
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5"
+                    checked={isChecked4}
+                    onChange={() => setIsChecked4(!isChecked4)}
+                    disabled={true}
+                  />
+                  4 - Above Standard Performance
                 </h1>
               </td>
               <td className={`${td} text-center`}>85-94</td>
@@ -377,7 +441,14 @@ const Evaluatedlist = ({ params }) => {
               <td colspan="2" className={`${td}`}></td>
               <td colspan="2" className={`${td}`}>
                 <h1 className="text-left">
-                  <input type="checkbox"></input> 3 - Standard Performance
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5"
+                    checked={isChecked3}
+                    onChange={() => setIsChecked3(!isChecked3)}
+                    disabled={true}
+                  />
+                  3 - Standard Performance
                 </h1>
               </td>
               <td className={`${td} text-center`}>75-84</td>
@@ -386,7 +457,14 @@ const Evaluatedlist = ({ params }) => {
               <td colspan="2" className={`${td}`}></td>
               <td colspan="2" className={`${td}`}>
                 <h1 className="text-left">
-                  <input type="checkbox"></input> 2 - Below Standard Performance
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5"
+                    checked={isChecked2}
+                    onChange={() => setIsChecked2(!isChecked2)}
+                    disabled={true}
+                  />
+                  2 - Below Standard Performance
                 </h1>
               </td>
               <td className={`${td} text-center`}>65-74 </td>
@@ -395,7 +473,14 @@ const Evaluatedlist = ({ params }) => {
               <td colspan="2" className={`${td}`}></td>
               <td colspan="2" className={`${td}`}>
                 <h1 className="text-left">
-                  <input type="checkbox"></input> 1 - Unacceptable performance
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-5 w-5"
+                    checked={isChecked}
+                    onChange={() => setIsChecked(!isChecked)}
+                    disabled={true}
+                  />
+                  1 - Unacceptable performance
                 </h1>
               </td>
               <td className={`${td} text-center`}>below 65</td>
@@ -409,7 +494,7 @@ const Evaluatedlist = ({ params }) => {
               </td>
             </tr>
             <tr className="border-r border-l border-gray-900">
-              <td className={`${td} text-center`} colspan="5">
+              <td className={`${td} italic text-center`} colspan="5">
                 {evalemp.comment}
               </td>
             </tr>

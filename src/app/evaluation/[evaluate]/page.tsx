@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import TableEval from "./../../components/tableeval";
 import Header from "./../../components/header";
+import Criteria from "../../components/Criteria";
+import criteriaData from "../../components/criteriaData";
 
 function getDate() {
   const today = new Date();
@@ -19,133 +21,77 @@ function getDate() {
 }
 
 const Evaluation = ({ params }) => {
+  // prettier-ignore
   const rating = [
-    "10",
-    "9.5",
-    "9",
-    "8.5",
-    "8",
-    "7.5",
-    "7",
-    "6.5",
-    "6",
-    "5.5",
-    "5",
-    "4.5",
-    "4",
-    "3.5",
-    "3",
-    "2.5",
-    "2",
-    "1.5",
-    "1",
-    ".5",
-    "0",
+    "10", "9.5", "9", "8.5", "8", "7.5", "7", "6.5", "6", "5.5", "5", "4.5", "4", "3.5", "3", "2.5", "2", "1.5", "1", ".5", "0",
   ];
   const td = "border border-gray-900 px-4 py-2 text-left mb-4 text-xl";
   const router = useRouter();
   const [comment, setComment] = useState("");
   const [purpose, setPurpose] = useState("ANNUAL PERFORMANCE REVIEW");
+  // prettier-ignore
+  const [rate, setRate] = useState({
+    one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, seven: 0, eight: 0, nine: 0, ten: 0, eleven: 0, twelve: 0,
+    commentall: "", comment1: "", comment2: "", comment3: "", comment4: "", comment5: "", comment6: "", comment7: "", comment8: "",
+    comment9: "", comment10: "", comment11: "", comment12: "",
+  });
+  // const [total1ok, setTotal1ok] = useState({
+  //   one: (rate.one * 1.5).toFixed(2),
+  // });
+  // prettier-ignore
+  const total1ok = (rate.one * 1.5).toFixed(2);
+  const total2ok = (rate.two * 1.5).toFixed(2);
+  const total3ok = (rate.three * 1.5).toFixed(2);
+  const total4ok = (rate.four * 0.5).toFixed(2);
+  const total5ok = (rate.five * 1.0).toFixed(2);
+  const total6ok = (rate.six * 0.5).toFixed(2);
+  const total7ok = (rate.seven * 0.5).toFixed(2);
+  const total8ok = (rate.eight * 0.7).toFixed(2);
+  const total9ok = (rate.nine * 0.7).toFixed(2);
+  const total10ok = (rate.ten * 0.45).toFixed(2);
+  const total11ok = (rate.eleven * 0.7).toFixed(2);
+  const total12ok = (rate.twelve * 0.45).toFixed(2);
+  // prettier-ignore
+  const oatotal = ( parseFloat(total1ok) + parseFloat(total2ok) + parseFloat(total3ok) + parseFloat(total4ok) +
+    parseFloat(total5ok) + parseFloat(total6ok) + parseFloat(total7ok) + parseFloat(total8ok) + parseFloat(total9ok) + 
+    parseFloat(total10ok) + parseFloat(total11ok) + parseFloat(total12ok)).toFixed(2);
 
-  const [rating1, setRating1] = useState(1);
-  const total1ok = (rating1 * 1.5).toFixed(2);
-  const [rating2, setRating2] = useState(1);
-  const total2ok = (rating2 * 1.5).toFixed(2);
-  const [rating3, setRating3] = useState(1);
-  const total3ok = (rating3 * 1.5).toFixed(2);
-  const [rating4, setRating4] = useState(1);
-  const total4ok = (rating4 * 0.5).toFixed(2);
-  const [rating5, setRating5] = useState(1);
-  const total5ok = (rating5 * 1.0).toFixed(2);
-  const [rating6, setRating6] = useState(1);
-  const total6ok = (rating6 * 0.5).toFixed(2);
-  const [rating7, setRating7] = useState(1);
-  const total7ok = (rating7 * 0.5).toFixed(2);
-  const [rating8, setRating8] = useState(1);
-  const total8ok = (rating8 * 0.7).toFixed(2);
-  const [rating9, setRating9] = useState(1);
-  const total9ok = (rating9 * 0.7).toFixed(2);
-  const [rating10, setRating10] = useState(1);
-  const total10ok = (rating10 * 0.45).toFixed(2);
-  const [rating11, setRating11] = useState(1);
-  const total11ok = (rating11 * 0.7).toFixed(2);
-  const [rating12, setRating12] = useState(1);
-  const total12ok = (rating12 * 0.45).toFixed(2);
-  // const rtotal = parseInt(rating1) + parseInt(rating2) + parseInt(rating3);
-  const oatotal = (
-    parseFloat(total1ok) +
-    parseFloat(total2ok) +
-    parseFloat(total3ok) +
-    parseFloat(total4ok) +
-    parseFloat(total5ok) +
-    parseFloat(total6ok) +
-    parseFloat(total7ok) +
-    parseFloat(total8ok) +
-    parseFloat(total9ok) +
-    parseFloat(total10ok) +
-    parseFloat(total11ok) +
-    parseFloat(total12ok)
-  ).toFixed(2);
-
-  // const oatotalok = oatotal.toFixed(2);
   const [evalemp, setEvalEmp] = useState([]);
   const [currentDate, setCurrentDate] = useState(getDate());
-  const [color, setColor] = useState({
-    one: "transparent",
-    two: "transparent",
-    three: "transparent",
-    four: "transparent",
-    five: "transparent",
+  // prettier-ignore
+  const [isChecked, setIsChecked] = useState({
+    one: true, two: false, three: false, four: false, five: false,
   });
+  // prettier-ignore
   const handleCompute = () => {
     if (oatotal <= 64) {
-      setColor((prevColor) => ({
+      setIsChecked((prevColor) => ({
         ...prevColor,
-        one: "gray",
-        two: "transparent",
-        three: "transparent",
-        four: "transparent",
-        five: "transparent",
+        one: true, two: false, three: false, four: false, five: false,
       }));
     }
     if (oatotal >= 65) {
-      setColor((prevColor) => ({
+      setIsChecked((prevColor) => ({
         ...prevColor,
-        two: "gray",
-        one: "transparent",
-        three: "transparent",
-        four: "transparent",
-        five: "transparent",
+        one: false, two: true, three: false, four: false, five: false,
       }));
     }
     if (oatotal >= 75) {
-      setColor((prevColor) => ({
+      setIsChecked((prevColor) => ({
         ...prevColor,
-        one: "transparent",
-        two: "transparent",
-        three: "gray",
-        four: "transparent",
-        five: "transparent",
+        one: false, two: false, three: true, four: false, five: false,
       }));
     }
     if (oatotal >= 85) {
-      setColor((prevColor) => ({
+      setIsChecked((prevColor) => ({
         ...prevColor,
-        one: "transparent",
-        two: "transparent",
-        three: "transparent",
-        four: "gray",
-        five: "transparent",
+        one: false, two: false, three: false, four: true, five: false,
       }));
     }
     if (oatotal >= 95) {
-      setColor((prevColor) => ({
+      setIsChecked((prevColor) => ({
         ...prevColor,
-        one: "transparent",
-        two: "transparent",
-        three: "transparent",
-        four: "transparent",
-        five: "gray",
+        one: false, two: false, three: false, four: false, five: true,
       }));
     }
   };
@@ -192,21 +138,21 @@ const Evaluation = ({ params }) => {
         rateeposition: evalemp.designation,
         datehired: evalemp.datestarted,
         dateevaluated: currentDate,
-        attendance: rating1,
-        workefficiency: rating2,
-        behavior: rating3,
+        attendance: rate.one,
+        workefficiency: rate.two,
+        behavior: rate.three,
 
-        relatedduties: rating4,
-        technical: rating5,
-        communication: rating6,
-        resourceutilization: rating7,
-        initiative: rating8,
-        integrity: rating9,
-        safety: rating10,
-        dependability: rating11,
-        loyalty: rating12,
+        relatedduties: rate.four,
+        technical: rate.five,
+        communication: rate.six,
+        resourceutilization: rate.seven,
+        initiative: rate.eight,
+        integrity: rate.nine,
+        safety: rate.ten,
+        dependability: rate.eleven,
+        loyalty: rate.twelve,
 
-        tattendance: total1ok,
+        tattendance: total1ok.one,
         tworkefficiency: total2ok,
         tbehavior: total3ok,
         trelatedduties: total4ok,
@@ -219,7 +165,19 @@ const Evaluation = ({ params }) => {
         tdependability: total11ok,
         tloyalty: total12ok,
         totalscore: oatotal,
-        comment: comment,
+        comment: rate.commentall,
+        comment1: rate.comment1,
+        comment2: rate.comment2,
+        comment3: rate.comment3,
+        comment4: rate.comment4,
+        comment5: rate.comment5,
+        comment6: rate.comment6,
+        comment7: rate.comment7,
+        comment8: rate.comment8,
+        comment9: rate.comment9,
+        comment10: rate.comment10,
+        comment11: rate.comment11,
+        comment12: rate.comment12,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -229,11 +187,46 @@ const Evaluation = ({ params }) => {
     console.log(datas);
   };
 
+  const tableStyle =
+    "px-5 mx-auto border-collapse border border-slate-500 text-center text-xl";
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const [hidden, setHidden] = useState(
+    new Array(criteriaData.length).fill(true)
+  );
+
+  const toggleHidden = (index) => {
+    const newHidden = [...hidden];
+    newHidden[index] = !newHidden[index];
+    setHidden(newHidden);
+  };
+
   return (
     <div className="text-center mx-auto">
-      <button className="btn btn-block" onClick={createPDF} type="button">
-        Download and Save
+      <button
+        className="fixed top-50 right-0 p-2 bg-yellow-200 shadow-md font-bold"
+        onClick={toggleSidebar}
+      >
+        categories
       </button>
+      <h1 className="fixed bottom-0 p-2 bg-yellow-200 shadow-md font-bold w-full">
+        <h1 className="text-xs">you are evaluating</h1>
+        <h1 className="text-red-900 italic font-bold text-xl">
+          {evalemp.lname}, {evalemp.fname} {evalemp.mname}
+        </h1>
+        <button
+          className="w-full btn btn-block bg-blue-200"
+          onClick={createPDF}
+          type="submit"
+        >
+          Download and Save
+        </button>
+      </h1>
+
       <div id="pdf">
         <Header />
         <h1 className="font-bold text-2xl mb-5 mt-5">
@@ -241,27 +234,17 @@ const Evaluation = ({ params }) => {
         </h1>
         <TableEval
           rating={rating}
+          rate={rate}
+          setRate={setRate}
           handleCompute={handleCompute}
-          color={color}
           currentDate={currentDate}
           evalemp={evalemp}
           setPurpose={setPurpose}
           purpose={purpose}
           setComment={setComment}
           comment={comment}
-          setRating1={setRating1}
-          setRating2={setRating2}
-          setRating3={setRating3}
-          setRating4={setRating4}
-          setRating5={setRating5}
-          setRating6={setRating6}
-          setRating7={setRating7}
-          setRating8={setRating8}
-          setRating9={setRating9}
-          setRating10={setRating10}
-          setRating11={setRating11}
-          setRating12={setRating12}
           total1ok={total1ok}
+          // setTotal1ok={setTotal1ok}
           total2ok={total2ok}
           total3ok={total3ok}
           total4ok={total4ok}
@@ -274,22 +257,44 @@ const Evaluation = ({ params }) => {
           total11ok={total11ok}
           total12ok={total12ok}
           oatotal={oatotal}
-          rating1={rating1}
-          rating2={rating2}
-          rating3={rating3}
-          rating4={rating4}
-          rating5={rating5}
-          rating6={rating6}
-          rating7={rating7}
-          rating8={rating8}
-          rating9={rating9}
-          rating10={rating10}
-          rating11={rating11}
-          rating12={rating12}
+          setIsChecked={setIsChecked}
+          isChecked={isChecked}
         />
         <br />
         <br />
       </div>
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 bg-white p-4 shadow-md hover:bg-gray-300 bg-gray-700 p-8 rounded-md shadow-md h-full w-3/4 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-[98%]"
+        } transition-transform ease-in-out duration-300`}
+      >
+        <div className="bg-gradient-to-r from-gray-200 via-gray-400 to-pink-400 h-full w-full overflow-y-auto">
+          <button
+            className="p-2 bg-yellow-200 shadow-md font-bold w-full mb-3"
+            onClick={toggleSidebar}
+          >
+            close
+          </button>
+          <div className="bg-gradient-to-r from-cyan-500 to-blue-900 p-5 h-[70px] shadow-md w-full">
+            <h2 className="text-2xl font-bold text-white stroke-cyan-900">
+              FACTORS TO CONSIDER IN EVALUATING THE PERFORMANCE OF THE RATEE
+            </h2>
+          </div>
+          <div className="w-[90%] mx-auto">
+            {criteriaData.map((data, index) => (
+              <Criteria
+                key={index}
+                title={data.title}
+                description={data.description}
+                isOpen={!hidden[index]}
+                toggle={() => toggleHidden(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* End Sidebar */}
     </div>
   );
 };
